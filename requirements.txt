@@ -1,0 +1,6 @@
+flask
+numpy
+pickle-mixin
+scikit-learn
+tensorflow
+keras

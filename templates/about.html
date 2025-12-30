@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - MindCare</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>MindCare</span>
+            </div>
+            <div class="nav-menu">
+                <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('detect') }}" class="nav-link">Detection</a>
+                <a href="{{ url_for('about') }}" class="nav-link active">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Full Width Image -->
+    <section class="about-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>About MindCare</h1>
+                <p>Understanding our mission to support mental health through technology</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="about-content-section">
+        <div class="container">
+            <!-- Mission Card -->
+            <div class="content-card">
+                <div class="card-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="card-content">
+                    <h2>Our Mission</h2>
+                    <p>MindCare is dedicated to providing accessible mental health screening tools using advanced artificial intelligence. We believe that early detection and awareness are crucial steps toward better mental health outcomes.</p>
+                </div>
+            </div>
+
+            <!-- What We Do Card -->
+            <div class="content-card">
+                <div class="card-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="card-content">
+                    <h2>What We Do</h2>
+                    <p>Our platform analyzes text patterns using sophisticated machine learning models to identify potential indicators of depression. While our tool is not a substitute for professional diagnosis, it serves as an early warning system to help individuals recognize when they might need professional support.</p>
+                </div>
+            </div>
+
+            <!-- Technology Card -->
+            <div class="content-card">
+                <div class="card-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <div class="card-content">
+                    <h2>Technology Behind MindCare</h2>
+                    <p>We employ an ensemble of machine learning models including Support Vector Machines, Random Forest, and BiLSTM neural networks. Our system processes natural language to detect emotional patterns, sentiment indicators, and linguistic markers associated with depression.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Key Features</h2>
+                <p>What makes MindCare different</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Privacy First</h3>
+                    <p>Your data is processed locally and never stored on our servers</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Instant Results</h3>
+                    <p>Get immediate feedback without waiting for appointments</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Compassionate Design</h3>
+                    <p>User-friendly interface created with mental health in mind</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Advanced Analytics</h3>
+                    <p>Multiple AI models working together for accurate insights</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Professional Grade</h3>
+                    <p>Built with clinical standards and evidence-based approaches</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Accessible Everywhere</h3>
+                    <p>Available 24/7 from any device with internet connection</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section class="emergency-section">
+        <div class="container">
+            <div class="emergency-card">
+                <div class="emergency-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="emergency-content">
+                    <h2>Important Notice</h2>
+                    <p>MindCare is an AI-powered screening tool designed for informational purposes only. It is not a substitute for professional medical diagnosis, advice, or treatment. If you are experiencing symptoms of depression or having thoughts of self-harm, please contact a healthcare professional immediately or call emergency services.</p>
+                    
+                    <div class="emergency-contacts">
+                        <div class="contact-item">
+                            <strong>24/7 Crisis Helpline: 988</strong>
+                            <p>Suicide & Crisis Lifeline - Call or text 988</p>
+                        </div>
+                        <div class="contact-item">
+                            <strong>National Mental Health Helpline</strong>
+                            <p>1-800-662-HELP (4357)</p>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Crisis Text Line</strong>
+                            <p>Text HOME to 741741</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-brain"></i>
+                        <span>MindCare</span>
+                    </div>
+                    <p>Empowering mental health awareness through technology</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('detect') }}">Detection</a></li>
+                        <li><a href="{{ url_for('about') }}">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Emergency</h4>
+                    <p><strong>24/7 Crisis: 988</strong></p>
+                    <p>National Helpline: 1-800-662-HELP</p>
+                    <p>Crisis Text: Text HOME to 741741</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MindCare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

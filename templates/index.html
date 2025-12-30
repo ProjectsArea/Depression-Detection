@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depression Detection - MindCare</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>MindCare</span>
+            </div>
+            <div class="nav-menu">
+                <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('detect') }}" class="nav-link active">Detection</a>
+                <a href="{{ url_for('about') }}" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Detection Section -->
+    <section class="detection-section">
+        <div class="container">
+            <div class="detection-header">
+                <div class="header-icon">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <h1>Mental Health Assessment</h1>
+                <p>Share your thoughts and feelings. Our AI will analyze patterns to provide insights about your emotional well-being.</p>
+            </div>
+
+            <div class="detection-container">
+                <div class="detection-form">
+                    <form method="POST" action="{{ url_for('detect') }}" class="assessment-form" id="assessmentForm">
+                        <div class="form-header">
+                            <h2><i class="fas fa-pen"></i> Express Yourself</h2>
+                            <p>Describe how you've been feeling lately. There's no judgment here - just a safe space to share.</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="text" class="form-label">
+                                <i class="fas fa-heart"></i>
+                                How are you feeling?
+                            </label>
+                            <textarea 
+                                id="text" 
+                                name="text" 
+                                class="form-textarea"
+                                placeholder="Share your thoughts, feelings, and what's been on your mind lately..."
+                                maxlength="1000"
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="char-counter">
+                                <i class="fas fa-keyboard"></i>
+                                <span id="charCount">0</span> / 1000 characters
+                            </div>
+                            <div class="button-group">
+                                <button type="button" class="btn-clear" onclick="clearForm()">
+                                    <i class="fas fa-eraser"></i>
+                                    Clear
+                                </button>
+                                <button type="submit" class="btn-analyze">
+                                    <i class="fas fa-brain"></i>
+                                    Analyze
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                {% if prediction %}
+                <div class="result-section" id="resultSection">
+                    <div class="result-header">
+                        <h2><i class="fas fa-chart-line"></i> Analysis Results</h2>
+                        <p>Based on your text patterns, here's what our analysis found:</p>
+                    </div>
+
+                    <div class="result-card {{ 'depressed' if prediction == 'Depressed' else 'not-depressed' }}">
+                        <div class="result-icon">
+                            {% if prediction == 'Depressed' %}
+                                <i class="fas fa-cloud-rain"></i>
+                            {% else %}
+                                <i class="fas fa-sun"></i>
+                            {% endif %}
+                        </div>
+                        <div class="result-content">
+                            <div class="result-title">
+                                {{ prediction }}
+                            </div>
+                            <div class="result-probability">
+                                <div class="probability-label">Confidence Level</div>
+                                <div class="probability-bar">
+                                    <div class="probability-fill" data-probability="{{ probability * 100 }}"></div>
+                                </div>
+                                <div class="probability-value">{{ probability }}%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if prediction == 'Depressed' %}
+                    <div class="support-section">
+                        <h3><i class="fas fa-hands-helping"></i> Support & Resources</h3>
+                        <div class="support-cards">
+                            <div class="support-card">
+                                <i class="fas fa-phone-alt"></i>
+                                <h4>Immediate Help</h4>
+                                <p>Call 988 or text HOME to 741741 for 24/7 crisis support</p>
+                            </div>
+                            <div class="support-card">
+                                <i class="fas fa-user-md"></i>
+                                <h4>Professional Help</h4>
+                                <p>Consider speaking with a mental health professional</p>
+                            </div>
+                            <div class="support-card">
+                                <i class="fas fa-users"></i>
+                                <h4>Support Groups</h4>
+                                <p>Connect with others who understand what you're going through</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="disclaimer-card">
+                        <div class="disclaimer-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="disclaimer-content">
+                            <h4>Important Disclaimer</h4>
+                            <p>This AI-based screening tool is for informational purposes only and is not a substitute for professional medical diagnosis, advice, or treatment. If you're experiencing symptoms of depression or mental health concerns, please consult with a qualified healthcare professional.</p>
+                        </div>
+                    </div>
+
+                    <div class="result-actions">
+                        <a href="{{ url_for('index') }}" class="btn-primary">
+                            <i class="fas fa-redo"></i>
+                            New Assessment
+                        </a>
+                        <a href="{{ url_for('home') }}" class="btn-secondary">
+                            <i class="fas fa-home"></i>
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-brain"></i>
+                        <span>MindCare</span>
+                    </div>
+                    <p>Empowering mental health awareness through technology</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('detect') }}">Detection</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Emergency</h4>
+                    <p><strong>24/7 Crisis: 988</strong></p>
+                    <p>National Helpline: 1-800-662-HELP</p>
+                    <p>Crisis Text: Text HOME to 741741</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MindCare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Character counter
+        const textarea = document.getElementById('text');
+        const charCount = document.getElementById('charCount');
+        
+        if (textarea && charCount) {
+            textarea.addEventListener('input', function() {
+                charCount.textContent = this.value.length;
+            });
+        }
+
+        // Set probability bar width from data attribute
+        const probabilityFill = document.querySelector('.probability-fill');
+        if (probabilityFill) {
+            const probability = probabilityFill.getAttribute('data-probability');
+            probabilityFill.style.width = probability + '%';
+        }
+
+        // Clear form function
+        function clearForm() {
+            if (confirm('Are you sure you want to clear your response?')) {
+                document.getElementById('assessmentForm').reset();
+                if (charCount) charCount.textContent = '0';
+            }
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
